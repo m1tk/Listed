@@ -31,8 +31,7 @@ namespace list {
         private Node<A> start;
 
         /// Constructor of List
-        /// Creating a null list is not supported
-        /// Dimension is the initial size of the list, it must be bigger than 0
+        /// Dimension is the initial size of the list
         public List(int dim) {
             Node<A> iter, _new;
             len = dim;
