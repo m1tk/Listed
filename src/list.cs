@@ -31,7 +31,8 @@ namespace list {
         private Node<A> start;
 
         /// Constructor of List
-        /// Dimension is the initial size of the list
+        /// Creating a null list is not supported
+        /// Dimension is the initial size of the list, it must be bigger than 0
         public List(int dim) {
             Node<A> iter, _new;
             len = dim;
@@ -126,7 +127,7 @@ namespace list {
         public A get(int index) {
             this.check_range(index);
             Node<A> iter = this.start;
-            
+
             for (int i = 0; i <= index; i++) {
                 if (i == index) {
                     return iter.get_val();
@@ -241,7 +242,7 @@ namespace list {
         public bool is_symetric() {
             Node<A> iter = this.start;
             Node<A> riter;
-            
+
             // create inversed list of half of our list
             List<A> inverse = new List<A>(0);
             for (int c = 0; c < this.len/2; c++) {
@@ -250,8 +251,6 @@ namespace list {
             }
             riter = inverse.start;
 
-            Console.WriteLine(this);
-            Console.WriteLine(inverse);
             for (int i = 0; i < inverse.len; i++) {
                 if (!riter.get_val().Equals(iter.get_val()))
                     return false;
@@ -278,7 +277,7 @@ namespace list {
                 iter = this.start;
             }
         }
-        
+
         /// Check if list is sorted
         public bool is_sorted() {
             Node<A> iter = this.start.get_next();
@@ -338,6 +337,33 @@ namespace list {
             return res;
         }
 
+        public void inverse() {
+            if (this.len <= 1)
+                return;
+            Node<A> last = this.start;
+            Node<A> iter = this.start;
+            Node<A> temp;
+            for (int i = 0; i < this.len-1; i++) {
+                last = last.get_next();
+            }
+
+            while (iter != last) {
+                // removing iter item and inserting it right after initial tail
+                // from: iter -x-> next
+                // initial tail -> iter --> others
+                temp = iter.get_next();
+                if (last.get_next() != null) {
+                    iter.set_next(last.get_next());
+                } else {
+                    iter.set_next(null);
+                }
+                last.set_next(iter);
+                iter = temp;
+            }
+
+            this.start = last;
+        }
+
         /// Display
         public override string ToString() {
             string list = "[";
@@ -354,7 +380,7 @@ namespace list {
 
         /// Comparing list to other list
         public int CompareTo(List<A> rhs) {
-            // no comparison return -1 if this size smaller than rhs 
+            // no comparison return -1 if this size smaller than rhs
             if (this.len != rhs.len)
                 return (this.len < rhs.len ? -1 : 1);
 
