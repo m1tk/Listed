@@ -351,7 +351,7 @@ namespace list {
             while (iter != last) {
                 // removing iter item and inserting it right after initial tail
                 // from: iter -x-> next
-                // initial tail -> iter --> others
+                // to: initial tail -> iter --> others
                 temp = iter.get_next();
                 if (last.get_next() != null) {
                     iter.set_next(last.get_next());
