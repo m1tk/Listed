@@ -337,6 +337,7 @@ namespace list {
             return res;
         }
 
+        /// Inverse list
         public void inverse() {
             if (this.len <= 1)
                 return;
