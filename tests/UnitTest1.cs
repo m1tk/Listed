@@ -39,7 +39,7 @@ namespace tests
             l.del_index(1);
             l.del_index(2);
             l.del_index(0);
-            
+
             Assert.IsTrue(l.get(0) == 3 && l.length() == 1, "del_index not working");
         }
         [Test]
@@ -100,7 +100,6 @@ namespace tests
             l.set(3, 1);
             l.set(4, 6);
             l.sort();
-            Console.WriteLine(l);
 
             Assert.IsTrue(l.get(0) == 1 && l.get(1) == 1 && l.get(2) == 2 && l.get(3) == 3 && l.get(4) == 6, "sort not working");
         }
@@ -115,7 +114,6 @@ namespace tests
             l.set(4, 6);
             bool before = l.is_sorted();
             l.sort();
-            Console.WriteLine(l);
 
             Assert.IsTrue(l.is_sorted() && !before, "is_sorted not working");
         }
@@ -147,7 +145,7 @@ namespace tests
             l1.set(2, 2);
 
             List<int> l2 = l.sorted_fuse(l1);
-            
+
             List<int> l3 = new List<int>(6);
             l3.set(0, 0);
             l3.set(1, 1);
@@ -160,6 +158,20 @@ namespace tests
             bool match1 = l2.CompareTo(l3) == 0;
 
             Assert.IsTrue(match && !match1, "sorted_fuse not working");
+        }
+        [Test]
+        public void inverse()
+        {
+            List<int> l = new List<int>(5);
+            l.set(0, 0);
+            l.set(1, 1);
+            l.set(2, 2);
+            l.set(3, 3);
+            l.set(4, 4);
+            l.inverse();
+
+            System.Console.WriteLine(l);
+            Assert.IsTrue(l.get(0) == 4 && l.get(1) == 3 && l.get(2) == 2 && l.get(3) == 1 && l.get(4) == 0, "inverse not working");
         }
     }
 }
